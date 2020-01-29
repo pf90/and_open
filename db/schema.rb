@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200128133935) do
+ActiveRecord::Schema.define(version: 20200128140104) do
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "matched_member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matched_member_id"], name: "index_matches_on_matched_member_id"
+    t.index ["member_id", "matched_member_id"], name: "index_matches_on_member_id_and_matched_member_id", unique: true
+    t.index ["member_id"], name: "index_matches_on_member_id"
+  end
 
   create_table "members", force: :cascade do |t|
     t.string "name"

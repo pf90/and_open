@@ -10,6 +10,7 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
+    @members = Member.where.not(id: @member.id)
   end
 
   # GET /members/new

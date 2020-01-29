@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :members
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'members#index'
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :members
+  resources :matches, only: [:create, :destroy]
 end
