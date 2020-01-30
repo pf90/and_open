@@ -11,23 +11,34 @@
 </p>
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Back to home', members_path %>
 
+<div style="margin:20px 0px;">
+<%= form_tag member_path(@member), method: :get do %>
+  <%= text_field_tag :q, nil, placeholder: "Search" %>
+  <%= submit_tag 'Search', name: nil %>
+  <% if (params[:q]).present? %>
+    <%= link_to 'Clear Search', member_path(@member) %>
+  <% end %>
+<% end %>
+</div> 
+
+
+<h3><%= (params[:q]).present? ? 'Search Results' : 'Selected Friends' %></h3>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Original url</th>
-      <th colspan="3">Actions</th>
+      <th colspan="3">Friends?</th>
     </tr>
   </thead>
 
   <tbody>
     <% @members.each do |member| %>
       <tr>
-        <td><%= member.name %></td>
+        <td><%= link_to member.name, member %></td>
         <td><%= link_to member.original_url, member.original_url, target: '_blank' %></td>
-        <td><%= link_to 'Show', member %></td>
         <td> 
           <% if @member.matched_members.include?(member) %>
             <%= link_to 'Remove from friends', match_path(@member.matches.find_by(matched_member_id: member.id)), method: :delete, data: { confirm: 'Are you sure?' }%>

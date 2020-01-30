@@ -62,11 +62,22 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.6)
+    elasticsearch (7.4.0)
+      elasticsearch-api (= 7.4.0)
+      elasticsearch-transport (= 7.4.0)
+    elasticsearch-api (7.4.0)
+      multi_json
+    elasticsearch-transport (7.4.0)
+      faraday
+      multi_json
     erubi (1.9.0)
     execjs (2.7.0)
+    faraday (1.0.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.12.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (4.0.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
@@ -84,6 +95,8 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
+    multi_json (1.14.1)
+    multipart-post (2.1.1)
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
@@ -133,6 +146,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    searchkick (3.1.3)
+      activemodel (>= 4.2)
+      elasticsearch (>= 5)
+      hashie
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -185,6 +202,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.7)
   sass-rails (~> 5.0)
+  searchkick
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)

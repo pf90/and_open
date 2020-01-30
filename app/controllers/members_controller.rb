@@ -10,7 +10,8 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    @members = Member.where.not(id: @member.id)
+    query = params[:q].presence || "*"
+    @members = Member.search(query, where: {id: {not: @member.id}})
   end
 
   # GET /members/new
