@@ -1,0 +1,18 @@
+Background Questions
+1. Briefly explain the GIL assuming you were addressing a non-technical audience. What are the potential cost implications of the GIL for scaling a production application?
+
+2. Also for a non-technical audience, explain how a background job queuing service could help when accessing external APIs.
+
+1. The GIL (Global Interpreter Lock) is a lock on threads that means that only one thread can be in a state of execution at any point in time. 
+What is a thread? A thread is a like a worker that make your program do tasks. Threads can be used for performing Input/Output tasks or CPU (Central Processing Unit) applications, the distinction is not necessary for this question but will re-appear in part 2. 
+
+Why can only one thread run at any one specific point in time? 
+Take an example where multiple threads can run at the exact same time and they can access the same data, eg a shopping list.
+If two threads (A adding Apples & B adding Bannanas) tried to add items to that shopping list at the exact same time you may not know which suceeded. Therefore if B was marginally behind the bananas may be added but the addition of the apples may be lost therefore your data has become corrupted. 
+
+An example of how this can become a problem when scaling up may be trying to perform an action/task on a large data object. As a result of the lock (GIL), this might freeze your User Interface because the thread performing this action is frozen. Therefore from a user point of view everything might be stuck until this one action/task can be completed. 
+
+2. A background job is one that is processed outside of the usual request/response workflow that is part of any modern web framework. Normally, web applications receive a request from the outside world, do some processing (eg query database) and immediately return a response within a few milliseconds. This is the normal pattern that we have all become accustom to when developing applications for the web. 
+Background jobs on the other hand are those that may be started as normal from a request, but require a longer time to complete than the normal request. Because these requests cannot be processed immediately and return a response, they are normally processed on a seperate thread. Examples may be processing a large request, uploading a file or performing some image / large data manipulation.
+
+As referenced in part 1 there are 2 types of tasks which may run threads, CPU & Input Output(IO). IO tasks are ones that need to wait for an external resource (in this instance an external API - eg connecting to another website). A thread can stop while it waits for a resource to be available (eg the other website). This means that another thread can run and do its thing and not waste time waiting. Then subsequently the thread can handle the response as it comes back.
