@@ -10,6 +10,17 @@
   <%= link_to @member.original_url, @member.original_url, target: '_blank' %>
 </p>
 
+<p>
+  <strong>Headings:</strong>
+</p>
+<% @member.headers.each do |header| %>
+  <p>
+    <strong><%= header.heading_type %></strong>
+    <%= header.detail %>
+  </p>
+<% end %>
+
+
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back to home', members_path %>
 

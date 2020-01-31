@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200128140104) do
+ActiveRecord::Schema.define(version: 20200131161719) do
+
+  create_table "headers", force: :cascade do |t|
+    t.integer "heading_type"
+    t.integer "member_id"
+    t.text "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_headers_on_member_id"
+  end
+
+  create_table "headings", force: :cascade do |t|
+    t.integer "type"
+    t.integer "member_id"
+    t.text "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_headings_on_member_id"
+  end
 
   create_table "matches", force: :cascade do |t|
     t.integer "member_id"
